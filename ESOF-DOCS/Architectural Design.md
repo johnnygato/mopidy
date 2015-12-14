@@ -8,6 +8,11 @@
         - [Implementation view](#implementation-view)
         - [Deployment view](#deployment-view)
         - [Process view](#process-view)
+    - [Architectural Patterns](#architectural-patterns)
+        - [Layered Architecture](#layered-architecture)
+        - [Repository Architecture](#repository-architecture)
+        - [Client-Server Architecture](#client--server-architecture)
+
 
 ## Introduction
 
@@ -60,3 +65,26 @@ All that's left is a user machine: PC, Smartphone, etc. that has a client instal
 
 ### Process view
 <img src="./images/architectural/ProcessView.jpg" />
+
+## Architectural Patterns
+
+### Layered Architecture
+Mopidy has a layered architecture because its system is organized into layers, where each layer provides services to the layer above.
+Each layer can only interact with the layer directly below, that's why Mopidy has a **strict layered architecture**.
+
+The **Frontends** only interact with the **Core** which interacts with the **Mixer** and **Backends** layers. The backends have the possibility of accessing the low level **Audio** layer if they wish to provide custom playback functionality.
+
+<img src="./images/architectural/LayeredArchitecture.jpg" />
+
+### Repository Architecture
+All of Mopidy's source code and extensions are managed in a central repository on **GitHub** which is accessible to all system components, in this case developers.
+The repository accepts requests from components passively, it's called the **passive** variant.
+
+### Client-Server Architecture
+
+Mopidy itself is only a music server. Interaction between the server and users is made through the use of clients such as:
+- HTTP clients
+- MPD clients
+- UPnP clients
+
+This easily classifies it as having a **Client-Server Architecture**
